@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Jarvis orb for the accessibility shortcut: round, no background, filling the icon box,
+     so it sits in the floating capsule as a circle instead of a dark square. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:pathData="M24,24m-23,0a23,23 0,1 1,46 0a23,23 0,1 1,-46 0">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="sweep" android:centerX="24" android:centerY="24">
+                <item android:offset="0.0" android:color="#FF4C7DFF" />
+                <item android:offset="0.25" android:color="#FF8E5CF7" />
+                <item android:offset="0.5" android:color="#FFE9508F" />
+                <item android:offset="0.75" android:color="#FF19B3A6" />
+                <item android:offset="1.0" android:color="#FF4C7DFF" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:pathData="M24,24m-23,0a23,23 0,1 1,46 0a23,23 0,1 1,-46 0">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="16" android:centerY="13" android:gradientRadius="17">
+                <item android:offset="0.0" android:color="#8CFFFFFF" />
+                <item android:offset="1.0" android:color="#00FFFFFF" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M24,10 Q26.6,21.4 38,24 Q26.6,26.6 24,38 Q21.4,26.6 10,24 Q21.4,21.4 24,10 Z" />
+</vector>

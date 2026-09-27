@@ -1,0 +1,4 @@
+<resources>
+    <string name="a11y_label">Assistant screen control</string>
+    <string name="a11y_description">Lets the voice assistant read the screen and tap, type and scroll on your behalf. Everything runs on this phone.</string>
+</resources>

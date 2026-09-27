@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The Jarvis mark for the launcher and the accessibility shortcut: spectrum orb, soft glow,
+     white four-point spark. 108dp adaptive-icon canvas; artwork kept inside the 66dp safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Glow: fades from the orb's edge outward. -->
+    <path android:pathData="M54,54m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="54" android:centerY="54" android:gradientRadius="32">
+                <item android:offset="0.70" android:color="#668E5CF7" />
+                <item android:offset="1.0" android:color="#008E5CF7" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- Orb: the Jarvis spectrum. -->
+    <path android:pathData="M54,54m-23,0a23,23 0,1 1,46 0a23,23 0,1 1,-46 0">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="sweep" android:centerX="54" android:centerY="54">
+                <item android:offset="0.0" android:color="#FF4C7DFF" />
+                <item android:offset="0.25" android:color="#FF8E5CF7" />
+                <item android:offset="0.5" android:color="#FFE9508F" />
+                <item android:offset="0.75" android:color="#FF19B3A6" />
+                <item android:offset="1.0" android:color="#FF4C7DFF" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- Glossy highlight. -->
+    <path android:pathData="M54,54m-23,0a23,23 0,1 1,46 0a23,23 0,1 1,-46 0">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="46" android:centerY="44" android:gradientRadius="17">
+                <item android:offset="0.0" android:color="#8CFFFFFF" />
+                <item android:offset="1.0" android:color="#00FFFFFF" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- Spark: four-point star with softly concave sides. -->
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M54,40 Q56.5,51.5 68,54 Q56.5,56.5 54,68 Q51.5,56.5 40,54 Q51.5,51.5 54,40 Z" />
+</vector>

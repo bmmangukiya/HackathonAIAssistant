@@ -1,0 +1,16 @@
+# Brazil package metadata only, so the repo can live on code.amazon.com.
+# The app is built with Gradle (./gradlew :app:assembleDebug), not brazil-build.
+package.HackathonPayUIAIAssistant = {
+    interfaces = (1.0);
+
+    build-system = no-op;
+    build-tools = {
+        1.0 = {
+        };
+    };
+
+    dependencies = {
+        1.0 = {
+        };
+    };
+};

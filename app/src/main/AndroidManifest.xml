@@ -1,0 +1,86 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Calls/SMS are optional: the app still installs on devices without telephony. -->
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Phone-to-phone agent link (Nearby Connections) and photo sharing. -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <!-- Jarvis card over other apps when the accessibility service is off (TYPE_APPLICATION_OVERLAY). -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- Self-heal: lets the app re-add its own accessibility service when vivo's
+         anti-fraud monitor strips it on app-switch. Granted via adb pm grant. -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <!-- "Jarvis" hotword from any screen: a microphone foreground service with a notification. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- The tick when "Jarvis" is heard. -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- Restored: permissions my wave-1/wave-2 skills need (the anti-fraud a11y revocation
+         was NOT caused by these — it's the vivo AccessibilityEnhance monitor, handled by the
+         self-heal watchdog above). -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <!-- Reads multi-GB models from /sdcard/Download/models. -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".AssistantApp"
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_jarvis_shortcut"
+        android:theme="@android:style/Theme.Material.NoActionBar">
+
+        <!-- Vendor libs for LiteRT-LM: OpenCL (Adreno GPU) and FastRPC (Hexagon NPU). -->
+        <uses-native-library android:name="libOpenCL.so" android:required="false" />
+        <uses-native-library android:name="libcdsprpc.so" android:required="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Give the accessibility shortcut (floating button) the Jarvis icon, not the default. -->
+        <service
+            android:name="com.hackathon.assistant.perception.AssistantAccessibilityService"
+            android:icon="@drawable/ic_jarvis_shortcut"
+            tools:node="merge" />
+
+        <service
+            android:name=".JarvisService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <!-- Dev/test hook: inject a text command over adb, see README. Only the adb shell may send
+             it (it holds DUMP; ordinary apps can't), so other apps can't make Jarvis call or text. -->
+        <receiver
+            android:name=".DebugCommandReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="com.hackathon.assistant.COMMAND" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
